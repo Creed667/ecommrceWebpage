@@ -121,6 +121,7 @@ function add(val1) {
 
 
 function remove(val2) {
+    
     var x = parseFloat(val2.value);
     var f = 0;
     var dPrice = 0;
@@ -140,4 +141,93 @@ function remove(val2) {
         }
     }
     calculate()
+    setTimeout(clearInnerHTML,2000);
+}
+
+let slideIndex = 1;
+showSlides(slideIndex);
+
+function plusSlides(n) {
+  showSlides(slideIndex += n);
+}
+
+function currentSlide(n) {
+  showSlides(slideIndex = n);
+}
+
+function showSlides(n) {
+  let i;
+  let slides = document.getElementsByClassName("mySlides");
+  let dots = document.getElementsByClassName("dot");
+  if (n > slides.length) {slideIndex = 1}    
+  if (n < 1) {slideIndex = slides.length}
+  for (i = 0; i < slides.length; i++) {
+    slides[i].style.display = "none";  
+  }
+  for (i = 0; i < dots.length; i++) {
+    dots[i].className = dots[i].className.replace(" active", "");
+  }
+  slides[slideIndex-1].style.display = "block";  
+  dots[slideIndex-1].className += " active";
+}
+
+showSlides2();
+
+function showSlides2() {
+  let i;
+  let dots = document.getElementsByClassName("dot");
+  let slides = document.getElementsByClassName("mySlides");
+  for (i = 0; i < slides.length; i++) {
+    slides[i].style.display = "none";
+  }
+  slideIndex++;
+  if (slideIndex > slides.length) {slideIndex = 1}
+  slides[slideIndex-1].style.display = "block";
+  setTimeout(showSlides2, 4000); // Change image every 2 seconds
+  for (i = 0; i < dots.length; i++) {
+    dots[i].className = dots[i].className.replace(" active", "");
+  }
+  dots[slideIndex-1].className += " active";
+}
+ function clearInnerHTML()
+ {
+    document.getElementById('message').innerHTML =' ';
+ }
+function order() {
+    console.log("clicked")
+    if (totalProducts != 0) {
+        document.getElementById('message').innerHTML = `<div class=" Message-success" role="alert">
+        Order Successful!
+    </div>`
+    totalProducts = 0;
+    price = 0;
+    deliveryCharge = 10;
+    shippingCost = 10;
+    totalPrice = 0;
+    tax = 0;
+    grandTotal = 0;
+    discount = 0;
+    finalTotal = 0;
+    for (let i = 0; i < pair.length; i++)
+    {
+        pair[i][1]=0;
+    }
+    }
+    else {
+        
+        document.getElementById('message').innerHTML = `<div class="Message-unsuccess" role="alert">
+         Cart is empty!
+    </div>`
+    }
+    document.getElementById('totalProducts').innerHTML = 0;
+    document.getElementById('price').innerHTML = '$ ' + 0;
+    document.getElementById('deliveryCharge').innerHTML = '$ ' + 0;
+    document.getElementById('shippingCost').innerHTML = '$ ' + 0;
+    document.getElementById('totalPrice').innerHTML = '$ ' + 0;
+    document.getElementById('tax').innerHTML = '$ ' + 0;
+    document.getElementById('grandTotal').innerHTML = '$ ' + 0;
+    document.getElementById('discount').innerHTML = '$ ' + 0;
+    document.getElementById('finalTotal').innerHTML = '$ ' + 0;
+
+    setTimeout(clearInnerHTML,2000);
 }
